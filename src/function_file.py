@@ -9,19 +9,19 @@ import matplotlib.pyplot as plt
 def convert_float(dataframe):
   '''
   INPUT
-    dataframe - Global variable. Any dataframe acceptable.
-    col - Local variable. Used to go through all column in the dataframe.
+    dataframe - any dataframe acceptable.
+    col - local variable, used to go through all column in the dataframe.
   OUTPUT
     dataframe - Global varable. The input dataframe is replaced in the function. If the following 
-    logic is a pllicable on a column level.  
+    logic is aplicable on a column level.  
 
   The function will cycle through each column in the dataframe and replace any dashes or spaces
   with the NaN value definition from the numpy library. If the column is numeric in nature but
-  formatted as an object is will change it's datatype to a float. If the column in naturally a 
+  formatted as an object it will change it's datatype to a float. If the column in naturally a 
   string then the function will print "Could no concvert " followed by the column name and move
   on to the next column.
 
-  While debugging this function and viewing the dataset, at first looks I believed all blanks in 
+  While debugging this function and viewing the dataset, at first look I believed all blanks in 
   the data was given by a '-' however one factor that was a scored factor was failing 
   (ef_regulation_labor_dismissal) and the currently commented out section identified the row in 
   that column that failed and that it was an empty space. 
@@ -45,22 +45,22 @@ def convert_float(dataframe):
       #     print(row)
       print('Could not convert ' + col)
 
+
 def most_missing_col(dataframe, threshold):
   '''
   INPUT
-    dataframe - Global variable. The processed dataframe, with NaNs.
-    threshold - The threshold for percenatge of missing values.
+    dataframe - the processed dataframe, with NaNs.
+    threshold - the threshold for percenatge of missing values.
   OUTPUT
-    missing_col_list - List of vrables that have more missing values than the threshold identified.
+    missing_col_list - list of vrables that have more missing values than the threshold identified.
 
   The function will create a list of variables from the dataframe that have a greater percentage of
-  missing values that provided by the threshold input. 
+  missing values than provided by the threshold input. 
   '''
 
   missing_col_list = list(dataframe.columns[dataframe.isnull().mean() > threshold])
 
   return missing_col_list
-
 
 
 def country_per_region(selected_region, response, dataframe):
@@ -70,10 +70,10 @@ def country_per_region(selected_region, response, dataframe):
     response - which variable you want to take the mean of over the region
     dataframe - the dataset that contains Region
   OUTPUT
-    out_data - The aggregated mean of the reponse variable over the selected region.
+    out_data - the aggregated mean of the reponse variable over the selected region.
 
   This function works well to loop over multiple regions, or variables to get the mean
-  of that variable for each region. It needs to be called inside a loop. But works fine
+  of that variable for each region. It can be called inside a loop. But works fine
   on its own.
 
 '''
@@ -100,12 +100,12 @@ def plot_save_Region_correlation(var_1, var_2, region):
   plt.figure(figsize = (10,8))
   plt.subplots_adjust(bottom = 0.2)
 
-  plt.plot(var_1, linestyle = 'solid', color ='r')
-  plt.plot(var_2, linestyle='solid', color='#4b0082')
+  plt.plot(var_1, linestyle = 'solid', color = 'r')
+  plt.plot(var_2, linestyle = 'solid', color = '#4b0082')
   plt.ylabel("variable score")
   plt.xlabel("country")
   plt.xticks(rotation = 90)
-  plt.legend(("Human Freedom Score", "Personal woman's score"), loc='lower right')
+  plt.legend(("Human Freedom Score", "Personal woman's score"), loc = 'lower right')
   plt.grid(True)
 
   plt.title("The average personal women's freedom score aggregated for the top correlated factors. \n Region = " + region)
@@ -117,9 +117,9 @@ def plot_save_Region_correlation(var_1, var_2, region):
 def correlations_top_bottom(dataframe, region_select, var, n):
   '''
   INPUT
-    dataframe - The datafram, must contain region.
-    region_select - The selected region
-    var - teh response variable to check correlations against
+    dataframe - the proccessed dataframe, must contain region.
+    region_select - the selected region
+    var - the response variable to check correlations against
     n - number to variables to print
   OUTPUT
     Print top - Print the highest correlated factors
